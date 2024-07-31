@@ -16,7 +16,8 @@ class ProfitSum:
 
     def ana_profit(self):
         df = self.read_trade_info()
-        text = ''
+        text = 'sum:'
+        text += str(round(df['profits'].sum(), 2)) + '  \n'
         for i in range(len(df)):
             instrument = df.loc[i].instrument
             profits = round(df.loc[i].profits, 2)
