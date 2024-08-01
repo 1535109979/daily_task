@@ -11,8 +11,7 @@ class ProfitSum:
         self.engine = create_engine(
             'mysql+pymysql://app:6urA&D$%ji66WuHp@sh-cdb-peeq202o.sql.tencentcdb.com:59964/app?charset=utf8mb4')
 
-        self.url = ('https://oapi.dingtalk.com/robot/send?access_token='
-               '2b336337436ea0b4edb5c4117d584b01b613c9eaf102c284e27ae5cfb92d4b8b')
+        self.url = ('https://oapi.dingtalk.com/robot/send?access_token=71652eb274cd6a8cca66983528c87d0ae85467b3af5920f6c2f357f6127dab55')
 
     def ana_profit(self):
         df = self.read_trade_info()
