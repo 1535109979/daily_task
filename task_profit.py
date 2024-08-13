@@ -1,4 +1,5 @@
 import json
+import time
 from datetime import datetime
 
 import pandas as pd
@@ -14,19 +15,21 @@ class ProfitSum:
         self.url = ('https://oapi.dingtalk.com/robot/send?access_token=71652eb274cd6a8cca66983528c87d0ae85467b3af5920f6c2f357f6127dab55')
 
     def ana_profit(self):
-        try:
-            df = self.read_trade_info()
-        except:
-            self.send_msg('read db error')
-
-        text = 'sum:'
-        text += str(round(df['profits'].sum(), 2)) + '  \n'
-        for i in range(len(df)):
-            instrument = df.loc[i].instrument
-            profits = round(df.loc[i].profits, 2)
-            commission = df.loc[i].commissions
-            text += instrument + ' ' + str(profits) + '   \n'
-        self.send_msg(text)
+        while 1:
+            try:
+                df = self.read_trade_info()
+                text = 'sum:'
+                text += str(round(df['profits'].sum(), 2)) + '  \n'
+                for i in range(len(df)):
+                    instrument = df.loc[i].instrument
+                    profits = round(df.loc[i].profits, 2)
+                    commission = df.loc[i].commissions
+                    text += instrument + ' ' + str(profits) + '   \n'
+                self.send_msg(text)
+                return
+            except:
+                self.send_msg('read db error')
+                time.sleep(5)
 
     def read_trade_info(self):
         with self.engine.connect() as conn:
