@@ -15,8 +15,12 @@ class ProfitSum:
         self.url = ('https://oapi.dingtalk.com/robot/send?access_token=71652eb274cd6a8cca66983528c87d0ae85467b3af5920f6c2f357f6127dab55')
 
     def ana_profit(self):
+        a = 10
         while 1:
             try:
+                a += 1
+                if a > 10:
+                    return
                 df = self.read_trade_info()
                 text = 'sum:'
                 text += str(round(df['profits'].sum(), 2)) + '  \n'
